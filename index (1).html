@@ -465,7 +465,7 @@ async function openNote(){
   await sleep(1800); if(ok()) caret2.remove();
 }
 function closeNote(){noteTok++; caret2.remove(); note.classList.remove('on');}
-$('#jz').addEventListener('click',e=>{e.stopPropagation(); openNote();});
+$('#MG').addEventListener('click',e=>{e.stopPropagation(); openNote();});
 note.addEventListener('click',e=>{if(e.target===note||e.target.closest('.x')) closeNote();});
 
 /* ---------- Interacción ---------- */
