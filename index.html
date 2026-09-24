@@ -39,9 +39,9 @@ h1{font-family:'Trebuchet MS','Segoe UI',Arial,sans-serif;font-weight:800;letter
 #mute{position:fixed;top:calc(14px + env(safe-area-inset-top));left:16px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,210,63,.25);background:rgba(255,210,63,.04);color:rgba(255,217,106,.75);font-size:16px;cursor:pointer;z-index:5;opacity:0;pointer-events:none;transition:opacity .8s}
 #mute.on{opacity:1;pointer-events:auto}
 
-#jz{position:fixed;top:calc(14px + env(safe-area-inset-top));right:16px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,210,63,.25);background:rgba(255,210,63,.04);color:rgba(255,217,106,.6);font:italic 600 15px 'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;cursor:pointer;animation:jzGlow 3s ease-in-out infinite;z-index:5;transition:color .3s,border-color .3s}
-#jz:hover{color:#ffd96a;border-color:rgba(255,210,63,.6)}
-@keyframes jzGlow{0%,100%{box-shadow:0 0 0 rgba(255,200,40,0)}50%{box-shadow:0 0 16px rgba(255,200,40,.4)}}
+#MG{position:fixed;top:calc(14px + env(safe-area-inset-top));right:16px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,210,63,.25);background:rgba(255,210,63,.04);color:rgba(255,217,106,.6);font:italic 600 15px 'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;cursor:pointer;animation:MGGlow 3s ease-in-out infinite;z-index:5;transition:color .3s,border-color .3s}
+#MG:hover{color:#ffd96a;border-color:rgba(255,210,63,.6)}
+@keyframes MGGlow{0%,100%{box-shadow:0 0 0 rgba(255,200,40,0)}50%{box-shadow:0 0 16px rgba(255,200,40,.4)}}
 
 #note{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,.65);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .6s;z-index:10}
 #note.on{opacity:1;pointer-events:auto}
@@ -89,7 +89,7 @@ h1{font-family:'Trebuchet MS','Segoe UI',Arial,sans-serif;font-weight:800;letter
 
 <button id="again">↻ Ver de nuevo</button>
 
-<button id="jz" aria-label="Mensaje">Jz</button>
+<button id="MG" aria-label="Mensaje">MG</button>
 <div id="note">
   <div class="card">
     <button class="x" aria-label="Cerrar">×</button>
@@ -450,7 +450,7 @@ async function runText(){
   $('#again').classList.add('on');
 }
 
-/* ---------- Mensaje Jz ---------- */
+/* ---------- Mensaje MG ---------- */
 const note=$('#note'), noteP=$('#note p'), photo=$('#note .photo');
 async function openNote(){
   const my=++noteTok, ok=()=>my===noteTok;
@@ -465,7 +465,7 @@ async function openNote(){
   await sleep(1800); if(ok()) caret2.remove();
 }
 function closeNote(){noteTok++; caret2.remove(); note.classList.remove('on');}
-$('#jz').addEventListener('click',e=>{e.stopPropagation(); openNote();});
+$('#MG').addEventListener('click',e=>{e.stopPropagation(); openNote();});
 note.addEventListener('click',e=>{if(e.target===note||e.target.closest('.x')) closeNote();});
 
 /* ---------- Interacción ---------- */
@@ -485,7 +485,7 @@ muteBtn.addEventListener('click',e=>{
   muteBtn.textContent=music.muted?'🔇':'🔊';
 });
 addEventListener('pointerdown',e=>{
-  if(e.target.closest('#again,#jz,#note,#mute')) return;
+  if(e.target.closest('#again,#MG,#note,#mute')) return;
   if(state==='idle'){
     startMusic();
     state='fall'; ball.y=H/2; ball.vy=0;
